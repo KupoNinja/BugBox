@@ -1,0 +1,14 @@
+C:\Users\jover\source\dotnet-203\203-bug-server\bin\Debug\netcoreapp2.2\BugBox.deps.json
+C:\Users\jover\source\dotnet-203\203-bug-server\bin\Debug\netcoreapp2.2\BugBox.runtimeconfig.json
+C:\Users\jover\source\dotnet-203\203-bug-server\bin\Debug\netcoreapp2.2\BugBox.runtimeconfig.dev.json
+C:\Users\jover\source\dotnet-203\203-bug-server\bin\Debug\netcoreapp2.2\BugBox.dll
+C:\Users\jover\source\dotnet-203\203-bug-server\bin\Debug\netcoreapp2.2\BugBox.pdb
+C:\Users\jover\source\dotnet-203\203-bug-server\obj\Debug\netcoreapp2.2\BugBox.csprojAssemblyReference.cache
+C:\Users\jover\source\dotnet-203\203-bug-server\obj\Debug\netcoreapp2.2\BugBox.csproj.CoreCompileInputs.cache
+C:\Users\jover\source\dotnet-203\203-bug-server\obj\Debug\netcoreapp2.2\BugBox.RazorAssemblyInfo.cache
+C:\Users\jover\source\dotnet-203\203-bug-server\obj\Debug\netcoreapp2.2\BugBox.RazorAssemblyInfo.cs
+C:\Users\jover\source\dotnet-203\203-bug-server\obj\Debug\netcoreapp2.2\BugBox.AssemblyInfoInputs.cache
+C:\Users\jover\source\dotnet-203\203-bug-server\obj\Debug\netcoreapp2.2\BugBox.AssemblyInfo.cs
+C:\Users\jover\source\dotnet-203\203-bug-server\obj\Debug\netcoreapp2.2\BugBox.RazorTargetAssemblyInfo.cache
+C:\Users\jover\source\dotnet-203\203-bug-server\obj\Debug\netcoreapp2.2\BugBox.dll
+C:\Users\jover\source\dotnet-203\203-bug-server\obj\Debug\netcoreapp2.2\BugBox.pdb
