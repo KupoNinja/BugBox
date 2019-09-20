@@ -30,21 +30,46 @@ namespace BugBox.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<Bug> Get(string id)
         {
-            return "value";
+            try
+            {
+                return _bs.GetBugById(id);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<Bug> Post([FromBody] Bug bugData)
         {
+            try
+            {
+                Bug bug = _bs.AddBug(bugData);
+                return Ok(bug);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<Bug> Put(string id, [FromBody] Bug bugData)
         {
+            try
+            {
+                bugData.Id = id;
+                return Ok(_bs.EditBug(bugData));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // DELETE api/values/5
