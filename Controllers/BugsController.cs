@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BugBox.Models;
+using BugBox.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BugBox.Controllers
@@ -10,11 +12,20 @@ namespace BugBox.Controllers
     [ApiController]
     public class BugsController : ControllerBase
     {
+        private readonly BugsService _bs;
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<Bug>> Get()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                return Ok(_bs.GetBugs());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // GET api/values/5
@@ -40,6 +51,11 @@ namespace BugBox.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        public BugsController(BugsService bs)
+        {
+            _bs = bs;
         }
     }
 }
