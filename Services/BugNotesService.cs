@@ -22,7 +22,7 @@ namespace BugBox.Services
         //     return bug;
         // }
 
-        public Bug AddBugNote(BugNote bugNoteData)
+        public BugNote AddBugNote(BugNote bugNoteData)
         {
             var exists = _repo.Bugs.Find(b => b.Title == bugNoteData.Id);
             if (exists != null)
@@ -31,7 +31,7 @@ namespace BugBox.Services
             }
             bugNoteData.Id = Guid.NewGuid().ToString();
             bugNoteData.Timestamp = DateTime.Now;
-            _repo.Bugs.Add(bugNoteData);
+            _repo.BugNotes.Add(bugNoteData);
 
             return bugNoteData;
         }
