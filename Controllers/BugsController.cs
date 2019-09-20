@@ -73,9 +73,17 @@ namespace BugBox.Controllers
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPut("{id}/close")]
+        public ActionResult<Bug> CloseBug(string id)
         {
+            try
+            {
+                return Ok(_bs.CloseBug(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         public BugsController(BugsService bs)

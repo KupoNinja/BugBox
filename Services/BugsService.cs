@@ -47,6 +47,16 @@ namespace BugBox.Services
             return bug;
         }
 
+        public Bug CloseBug(string id)
+        {
+            var bug = GetBugById(id);
+            if (bug.ClosedDate != null) { throw new Exception("Quit wasting time... This bug is already resolved!"); }
+            bug.LastModified = DateTime.Now;
+            bug.ClosedDate = DateTime.Now;
+
+            return bug;
+        }
+
         public BugsService(FakeDb repo)
         {
             _repo = repo;
