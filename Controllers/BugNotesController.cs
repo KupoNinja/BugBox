@@ -44,12 +44,12 @@ namespace BugBox.Controllers
 
         // POST api/values
         [HttpPost]
-        public ActionResult<Bug> Post([FromBody] BugNote bugNoteData)
+        public ActionResult<BugNote> Post([FromBody] BugNote bugNoteData)
         {
             try
             {
-                Bug bug = _bns.AddBugNote(bugNoteData);
-                return Ok(bug);
+                BugNote bugNote = _bns.AddBugNote(bugNoteData);
+                return Ok(bugNote);
             }
             catch (Exception e)
             {
