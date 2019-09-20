@@ -29,6 +29,7 @@ namespace BugBox
         {
             services.AddSingleton<FakeDb>();
             services.AddTransient<BugsService>();
+            services.AddTransient<BugNotesService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
