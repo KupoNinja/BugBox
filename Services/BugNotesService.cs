@@ -8,12 +8,11 @@ namespace BugBox.Services
     public class BugNotesService
     {
         private readonly FakeDb _repo;
-        // private readonly BugsService _bs;
 
         public BugNote GetBugNoteById(string id)
         {
             var bugNote = _repo.BugNotes.Find(b => b.Id == id);
-            if (bugNote == null) { throw new Exception("Get your eyes checked, buddy. This Id doesn't exist."); }
+            if (bugNote == null) { throw new Exception("Get your eyes checked, buddy. This note Id doesn't exist."); }
 
             return bugNote;
         }
@@ -37,15 +36,15 @@ namespace BugBox.Services
             return bugNoteData;
         }
 
-        // NOTE Edits note but for some reason shows original note when pulling up note for specific bug
         public BugNote EditBugNote(BugNote bugNoteData)
         {
             var bug = GetBugById(bugNoteData.BugId);
+            var bugNote = GetBugNoteById(bugNoteData.Id);
             if (bug.ClosedDate != null) { throw new Exception("Quit wasting time... This bug is already resolved!"); }
-            bugNoteData.Timestamp = DateTime.Now;
-            bugNoteData.Body = bugNoteData.Body;
+            bugNote.Timestamp = DateTime.Now;
+            bugNote.Body = bugNoteData.Body;
 
-            return bugNoteData;
+            return bugNote;
         }
 
         public BugNotesService(FakeDb repo)
