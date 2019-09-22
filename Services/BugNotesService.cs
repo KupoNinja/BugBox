@@ -8,27 +8,27 @@ namespace BugBox.Services
     public class BugNotesService
     {
         private readonly FakeDb _repo;
+        // private readonly BugsService _bs;
 
-        public List<BugNote> GetBugNotes()
-        {
-            return _repo.BugNotes;
-        }
-
-        // public Bug GetBugById(string id)
+        // public List<BugNote> GetBugNotes()
         // {
-        //     var bug = _repo.Bugs.Find(b => b.Id == id);
-        //     if (bug == null) { throw new Exception("Get yer eyes checked, buddy. This Id doesn't exist."); }
-
-        //     return bug;
+        //     return _repo.BugNotes;
         // }
+
+        private BugNote GetBugNoteById(string id)
+        {
+            var bugNote = _repo.BugNotes.Find(b => b.Id == id);
+            if (bugNote == null) { throw new Exception("Get yer eyes checked, buddy. This Id doesn't exist."); }
+
+            return bugNote;
+        }
 
         public BugNote AddBugNote(BugNote bugNoteData)
         {
-            var exists = _repo.Bugs.Find(b => b.Title == bugNoteData.Id);
-            if (exists != null)
-            {
-                throw new Exception("This bug already exists.");
-            }
+            // NOTE Do check for if bug is closed
+            // NOTE Need to check Note.BugId to Bug.Id
+            var exists = _repo.BugNotes.Find(b => b.Id == bugNoteData.Id);
+            if (exists != null) { throw new Exception("This note already exists."); }
             bugNoteData.Id = Guid.NewGuid().ToString();
             bugNoteData.Timestamp = DateTime.Now;
             _repo.BugNotes.Add(bugNoteData);
@@ -36,16 +36,16 @@ namespace BugBox.Services
             return bugNoteData;
         }
 
-        // public Bug EditBug(Bug bugData)
-        // {
-        //     var bug = GetBugById(bugData.Id);
-        //     if (bug.ClosedDate != null) { throw new Exception("Quit wasting time... This bug is already resolved!"); }
-        //     bug.LastModified = DateTime.Now;
-        //     bug.Title = bugData.Title;
-        //     bug.Description = bugData.Description;
+        public BugNote EditBugNote(BugNote bugNoteData)
+        {
+            // NOTE Do a check for if a bug is closed
+            var bugNote = GetBugNoteById(bugNoteData.Id);
+            // if (bug.ClosedDate != null) { throw new Exception("Quit wasting time... This bug is already resolved!"); }
+            bugNote.Timestamp = DateTime.Now;
+            bugNote.Body = bugNoteData.Body;
 
-        //     return bug;
-        // }
+            return bugNote;
+        }
 
         // public Bug CloseBug(string id)
         // {

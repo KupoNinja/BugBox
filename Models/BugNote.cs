@@ -6,10 +6,10 @@ namespace BugBox.Models
 {
     public class BugNote : IBugNote
     {
-        [Required]
+        // [Required]
         public string Id { get; set; }
 
-        [Required]
+        // [Required]
         public string BugId { get; set; }
         public string Body { get; set; }
         public DateTime Timestamp { get; set; }

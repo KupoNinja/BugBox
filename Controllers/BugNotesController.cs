@@ -15,18 +15,18 @@ namespace BugBox.Controllers
         private readonly BugNotesService _bns;
 
         // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<BugNote>> Get()
-        {
-            try
-            {
-                return Ok(_bns.GetBugNotes());
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
+        // [HttpGet("{id}")]
+        // public ActionResult<IEnumerable<BugNote>> Get(string id)
+        // {
+        //     try
+        //     {
+        //         return Ok(_bns.GetBugNotesById(id));
+        //     }
+        //     catch (Exception e)
+        //     {
+        //         return BadRequest(e.Message);
+        //     }
+        // }
 
         // GET api/values/5
         // [HttpGet("{id}")]
@@ -57,34 +57,20 @@ namespace BugBox.Controllers
             }
         }
 
-        // // PUT api/values/5
-        // [HttpPut("{id}")]
-        // public ActionResult<Bug> Put(string id, [FromBody] Bug bugData)
-        // {
-        //     try
-        //     {
-        //         bugData.Id = id;
-        //         return Ok(_bs.EditBug(bugData));
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         return BadRequest(e.Message);
-        //     }
-        // }
-
-        // // DELETE api/values/5
-        // [HttpPut("{id}/close")]
-        // public ActionResult<Bug> CloseBug(string id)
-        // {
-        //     try
-        //     {
-        //         return Ok(_bs.CloseBug(id));
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         return BadRequest(e.Message);
-        //     }
-        // }
+        // PUT api/values/5
+        [HttpPut("{id}")]
+        public ActionResult<BugNote> Put(string id, [FromBody] BugNote bugNoteData)
+        {
+            try
+            {
+                bugNoteData.Id = id;
+                return Ok(_bns.EditBugNote(bugNoteData));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
         public BugNotesController(BugNotesService bns)
         {
