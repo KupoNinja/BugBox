@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BugBox.Data;
 using BugBox.Models;
 
@@ -22,13 +23,19 @@ namespace BugBox.Services
             return bug;
         }
 
+        public List<BugNote> GetBugNotes(string id)
+        {
+            var bug = GetBugById(id);
+            List<BugNote> bugNotes = _repo.BugNotes.FindAll(bn => bn.BugId == bug.Id);
+            if (!bugNotes.Any()) { throw new Exception("No notes on this one. Work harder!"); }
+
+            return bugNotes;
+        }
+
         public Bug AddBug(Bug bugData)
         {
-            var exists = _repo.Bugs.Find(b => b.Title == bugData.Title);
-            if (exists != null)
-            {
-                throw new Exception("This bug already exists.");
-            }
+            var exists = _repo.Bugs.Find(b => b.Id == bugData.Id);
+            if (exists != null) { throw new Exception("This bug already exists."); }
             bugData.Id = Guid.NewGuid().ToString();
             bugData.ReportedDate = DateTime.Now;
             _repo.Bugs.Add(bugData);
