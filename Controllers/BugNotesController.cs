@@ -29,18 +29,18 @@ namespace BugBox.Controllers
         // }
 
         // GET api/values/5
-        // [HttpGet("{id}")]
-        // public ActionResult<Bug> Get(string id)
-        // {
-        //     try
-        //     {
-        //         return _bs.GetBugById(id);
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         return BadRequest(e.Message);
-        //     }
-        // }
+        [HttpGet("{id}")]
+        public ActionResult<BugNote> Get(string id)
+        {
+            try
+            {
+                return _bns.GetBugNoteById(id);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
         // POST api/values
         [HttpPost]

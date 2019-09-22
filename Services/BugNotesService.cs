@@ -15,7 +15,7 @@ namespace BugBox.Services
         //     return _repo.BugNotes;
         // }
 
-        private BugNote GetBugNoteById(string id)
+        public BugNote GetBugNoteById(string id)
         {
             var bugNote = _repo.BugNotes.Find(b => b.Id == id);
             if (bugNote == null) { throw new Exception("Get yer eyes checked, buddy. This Id doesn't exist."); }
