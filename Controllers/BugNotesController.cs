@@ -28,8 +28,7 @@ namespace BugBox.Controllers
         //     }
         // }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
+        [HttpGet("api/bugs/{bugId}/notes/{id}")]
         public ActionResult<BugNote> Get(string id)
         {
             try
@@ -42,13 +41,12 @@ namespace BugBox.Controllers
             }
         }
 
-        // POST api/values
-        [HttpPost]
-        public ActionResult<BugNote> Post([FromBody] BugNote bugNoteData)
+        [HttpPost("api/bugs/{bugId}/notes")]
+        public ActionResult<BugNote> Post(string bugId, [FromBody] BugNote bugNoteData)
         {
             try
             {
-                BugNote bugNote = _bns.AddBugNote(bugNoteData);
+                BugNote bugNote = _bns.AddBugNote(bugId, bugNoteData);
                 return Ok(bugNote);
             }
             catch (Exception e)
@@ -57,14 +55,13 @@ namespace BugBox.Controllers
             }
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public ActionResult<BugNote> Put(string id, [FromBody] BugNote bugNoteData)
+        [HttpPut("api/bugs/{bugId}/notes/{id}")]
+        public ActionResult<BugNote> Put(string bugId, string id, [FromBody] BugNote bugNoteData)
         {
             try
             {
                 bugNoteData.Id = id;
-                return Ok(_bns.EditBugNote(bugNoteData));
+                return Ok(_bns.EditBugNote(bugId, bugNoteData));
             }
             catch (Exception e)
             {

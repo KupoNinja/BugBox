@@ -10,11 +10,6 @@ namespace BugBox.Services
         private readonly FakeDb _repo;
         // private readonly BugsService _bs;
 
-        // public List<BugNote> GetBugNotes()
-        // {
-        //     return _repo.BugNotes;
-        // }
-
         public BugNote GetBugNoteById(string id)
         {
             var bugNote = _repo.BugNotes.Find(b => b.Id == id);
@@ -23,12 +18,22 @@ namespace BugBox.Services
             return bugNote;
         }
 
-        public BugNote AddBugNote(BugNote bugNoteData)
+        public Bug GetBugById(string id)
+        {
+            var bug = _repo.Bugs.Find(b => b.Id == id);
+            if (bug == null) { throw new Exception("Get your eyes checked, buddy. This Id doesn't exist."); }
+
+            return bug;
+        }
+
+        public BugNote AddBugNote(string bugId, BugNote bugNoteData)
         {
             // NOTE Do check for if bug is closed
             // NOTE Need to check Note.BugId to Bug.Id
-            var exists = _repo.BugNotes.Find(b => b.Id == bugNoteData.Id);
-            if (exists != null) { throw new Exception("This note already exists."); }
+            var bug = GetBugById(bugId);
+            var bugNote = GetBugNoteById(bugNoteData.Id);
+            if (bugNote == null) { throw new Exception("Get yer eyes checked, buddy. This note doesn't exist."); }
+            if (bug.ClosedDate != null) { throw new Exception("Quit wasting time... This bug is already resolved!"); }
             bugNoteData.Id = Guid.NewGuid().ToString();
             bugNoteData.Timestamp = DateTime.Now;
             _repo.BugNotes.Add(bugNoteData);
@@ -36,26 +41,17 @@ namespace BugBox.Services
             return bugNoteData;
         }
 
-        public BugNote EditBugNote(BugNote bugNoteData)
+        public BugNote EditBugNote(string bugId, BugNote bugNoteData)
         {
-            // NOTE Do a check for if a bug is closed
+            var bug = GetBugById(bugId);
             var bugNote = GetBugNoteById(bugNoteData.Id);
-            // if (bug.ClosedDate != null) { throw new Exception("Quit wasting time... This bug is already resolved!"); }
+            if (bugNote == null) { throw new Exception("Get yer eyes checked, buddy. This note doesn't exist."); }
+            if (bug.ClosedDate != null) { throw new Exception("Quit wasting time... This bug is already resolved!"); }
             bugNote.Timestamp = DateTime.Now;
             bugNote.Body = bugNoteData.Body;
 
             return bugNote;
         }
-
-        // public Bug CloseBug(string id)
-        // {
-        //     var bug = GetBugById(id);
-        //     if (bug.ClosedDate != null) { throw new Exception("Quit wasting time... This bug is already resolved!"); }
-        //     bug.LastModified = DateTime.Now;
-        //     bug.ClosedDate = DateTime.Now;
-
-        //     return bug;
-        // }
 
         public BugNotesService(FakeDb repo)
         {

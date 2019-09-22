@@ -18,7 +18,7 @@ namespace BugBox.Services
         public Bug GetBugById(string id)
         {
             var bug = _repo.Bugs.Find(b => b.Id == id);
-            if (bug == null) { throw new Exception("Get yer eyes checked, buddy. This Id doesn't exist."); }
+            if (bug == null) { throw new Exception("Get your eyes checked, buddy. This Id doesn't exist."); }
 
             return bug;
         }
@@ -27,7 +27,7 @@ namespace BugBox.Services
         {
             var bug = GetBugById(id);
             List<BugNote> bugNotes = _repo.BugNotes.FindAll(bn => bn.BugId == bug.Id);
-            if (!bugNotes.Any()) { throw new Exception("No notes on this one. Work harder!"); }
+            if (!bugNotes.Any()) { throw new Exception("Zero notes on this one. Work harder!"); }
 
             return bugNotes;
         }
