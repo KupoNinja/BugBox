@@ -13,7 +13,7 @@ namespace BugBox.Services
         public BugNote GetBugNoteById(string id)
         {
             var bugNote = _repo.BugNotes.Find(b => b.Id == id);
-            if (bugNote == null) { throw new Exception("Get yer eyes checked, buddy. This Id doesn't exist."); }
+            if (bugNote == null) { throw new Exception("Get your eyes checked, buddy. This Id doesn't exist."); }
 
             return bugNote;
         }
@@ -26,13 +26,9 @@ namespace BugBox.Services
             return bug;
         }
 
-        public BugNote AddBugNote(string bugId, BugNote bugNoteData)
+        public BugNote AddBugNote(BugNote bugNoteData)
         {
-            // NOTE Do check for if bug is closed
-            // NOTE Need to check Note.BugId to Bug.Id
-            var bug = GetBugById(bugId);
-            var bugNote = GetBugNoteById(bugNoteData.Id);
-            if (bugNote == null) { throw new Exception("Get yer eyes checked, buddy. This note doesn't exist."); }
+            var bug = GetBugById(bugNoteData.BugId);
             if (bug.ClosedDate != null) { throw new Exception("Quit wasting time... This bug is already resolved!"); }
             bugNoteData.Id = Guid.NewGuid().ToString();
             bugNoteData.Timestamp = DateTime.Now;
@@ -41,16 +37,15 @@ namespace BugBox.Services
             return bugNoteData;
         }
 
-        public BugNote EditBugNote(string bugId, BugNote bugNoteData)
+        // NOTE Edits note but for some reason shows original note when pulling up note for specific bug
+        public BugNote EditBugNote(BugNote bugNoteData)
         {
-            var bug = GetBugById(bugId);
-            var bugNote = GetBugNoteById(bugNoteData.Id);
-            if (bugNote == null) { throw new Exception("Get yer eyes checked, buddy. This note doesn't exist."); }
+            var bug = GetBugById(bugNoteData.BugId);
             if (bug.ClosedDate != null) { throw new Exception("Quit wasting time... This bug is already resolved!"); }
-            bugNote.Timestamp = DateTime.Now;
-            bugNote.Body = bugNoteData.Body;
+            bugNoteData.Timestamp = DateTime.Now;
+            bugNoteData.Body = bugNoteData.Body;
 
-            return bugNote;
+            return bugNoteData;
         }
 
         public BugNotesService(FakeDb repo)
