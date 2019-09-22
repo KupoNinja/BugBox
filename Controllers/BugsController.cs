@@ -14,7 +14,6 @@ namespace BugBox.Controllers
     {
         private readonly BugsService _bs;
 
-        // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<Bug>> Get()
         {
@@ -28,7 +27,6 @@ namespace BugBox.Controllers
             }
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<Bug> Get(string id)
         {
@@ -55,7 +53,6 @@ namespace BugBox.Controllers
             }
         }
 
-        // POST api/values
         [HttpPost]
         public ActionResult<Bug> Post([FromBody] Bug bugData)
         {
@@ -70,7 +67,6 @@ namespace BugBox.Controllers
             }
         }
 
-        // PUT api/values/5
         [HttpPut("{id}")]
         public ActionResult<Bug> Put(string id, [FromBody] Bug bugData)
         {
@@ -85,7 +81,6 @@ namespace BugBox.Controllers
             }
         }
 
-        // DELETE api/values/5
         [HttpPut("{id}/close")]
         public ActionResult<Bug> CloseBug(string id)
         {

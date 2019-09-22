@@ -14,20 +14,6 @@ namespace BugBox.Controllers
     {
         private readonly BugNotesService _bns;
 
-        // GET api/values
-        // [HttpGet("{id}")]
-        // public ActionResult<IEnumerable<BugNote>> Get(string id)
-        // {
-        //     try
-        //     {
-        //         return Ok(_bns.GetBugNotesById(id));
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         return BadRequest(e.Message);
-        //     }
-        // }
-
         [HttpGet("api/bugs/{bugId}/notes/{id}")]
         public ActionResult<BugNote> Get(string id)
         {
