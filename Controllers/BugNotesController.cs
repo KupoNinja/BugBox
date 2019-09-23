@@ -19,7 +19,7 @@ namespace BugBox.Controllers
         {
             try
             {
-                return _bns.GetBugNoteById(id);
+                return Ok(_bns.GetBugNoteById(id));
             }
             catch (Exception e)
             {
@@ -32,8 +32,7 @@ namespace BugBox.Controllers
         {
             try
             {
-                BugNote bugNote = _bns.AddBugNote(bugNoteData);
-                return Ok(bugNote);
+                return Ok(_bns.AddBugNote(bugNoteData));
             }
             catch (Exception e)
             {

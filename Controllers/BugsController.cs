@@ -32,7 +32,7 @@ namespace BugBox.Controllers
         {
             try
             {
-                return _bs.GetBugById(id);
+                return Ok(_bs.GetBugById(id));
             }
             catch (Exception e)
             {
@@ -45,7 +45,7 @@ namespace BugBox.Controllers
         {
             try
             {
-                return _bs.GetBugNotes(id);
+                return Ok(_bs.GetBugNotes(id));
             }
             catch (Exception e)
             {
@@ -58,8 +58,7 @@ namespace BugBox.Controllers
         {
             try
             {
-                Bug bug = _bs.AddBug(bugData);
-                return Ok(bug);
+                return Ok(_bs.AddBug(bugData));
             }
             catch (Exception e)
             {
@@ -81,7 +80,8 @@ namespace BugBox.Controllers
             }
         }
 
-        [HttpPut("{id}/close")]
+        // NOTE Is this really an HttpDelete if it doesn't delete the bug?
+        [HttpDelete("{id}")]
         public ActionResult<Bug> CloseBug(string id)
         {
             try

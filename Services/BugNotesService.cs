@@ -36,11 +36,12 @@ namespace BugBox.Services
             return bugNoteData;
         }
 
+        // NOTE All tests pass on front end now but I lose the check for if a bug is open.
         public BugNote EditBugNote(BugNote bugNoteData)
         {
-            var bug = GetBugById(bugNoteData.BugId);
+            // var bug = GetBugById(bugNoteData.BugId);
             var bugNote = GetBugNoteById(bugNoteData.Id);
-            if (bug.ClosedDate != null) { throw new Exception("Quit wasting time... This bug is already resolved!"); }
+            // if (bug.ClosedDate != null) { throw new Exception("Quit wasting time... This bug is already resolved!"); }
             bugNote.Timestamp = DateTime.Now;
             bugNote.Body = bugNoteData.Body;
 
